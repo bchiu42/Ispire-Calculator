@@ -33,7 +33,9 @@ public class function
             double before = getNumberBefore(temp, carrot);
             double after = getNumberAfter(temp, carrot);
             double eval = Math.pow(before, after);
-
+            int beginIndex = getIndexNumberBefore(temp, carrot);
+            int endIndex = getIndexNumberAfter(temp, carrot);
+            temp = replaceExpression(temp, beginIndex, endIndex + 1, eval);
         }
     }
 
@@ -78,6 +80,16 @@ public class function
         return Double.parseDouble(numberText);
     }
 
+    private static int getIndexNumberBefore(String st, int index)
+    {
+        int i = index - 1;
+        while(isNumber(st, i) && i >= 0)
+        {
+            i--;
+        }
+        return i;
+    }
+
     private static double getNumberAfter(String st, int index)
     {
         int i = index + 1;
@@ -87,6 +99,16 @@ public class function
         }
         String numberText = st.substring(index + 1, i + 1);
         return Double.parseDouble(numberText);
+    }
+
+    private static int getIndexNumberAfter(String st, int index)
+    {
+        int i = index + 1;
+        while(isNumber(st, i) && i < st.length())
+        {
+            i++;
+        }
+        return i;
     }
 
     private static boolean isNumber(String st, int i)
